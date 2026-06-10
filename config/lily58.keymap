@@ -9,14 +9,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        f3_layer {
-            bindings = <&mo 3>;
-            key-positions = <50 57>;
-        };
-    };
+    combos { compatible = "zmk,combos"; };
 
     keymap {
         compatible = "zmk,keymap";
@@ -76,10 +69,15 @@
             >;
         };
 
-        extra_1 { status = "reserved"; };
+        f3_layer { status = "reserved"; };
+    };
 
-        extra_2 { status = "reserved"; };
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
 
-        extra_3 { status = "reserved"; };
+        f1+f2 {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
     };
 };
