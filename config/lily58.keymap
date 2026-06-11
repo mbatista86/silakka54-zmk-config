@@ -70,11 +70,11 @@
 
             display-name = "F1 Layer";
             bindings = <
-&kp ENTER    &kp F1          &kp F2          &kp F3           &kp F4  &kp F5                  &kp F6           &kp F7           &kp F8           &kp F9           &kp F10  &trans
-&kp MINUS    &kp EQUAL       &kp UP_ARROW    &trans           &trans  &trans                  &trans           &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &trans   &trans
-&emoji_call  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans  &trans                  &trans           &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &trans   &trans
-&trans       &trans          &trans          &trans           &trans  &trans  &none    &none  &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &trans   &trans
-                                             &trans           &trans  &trans  &none    &none  &trans           &trans           &trans
+&kp ENTER    &kp F1          &kp F2          &kp F3           &kp F4  &kp F5                       &kp F6           &kp F7           &kp F8           &kp F9           &kp F10  &trans
+&kp MINUS    &kp EQUAL       &kp UP_ARROW    &trans           &trans  &trans                       &trans           &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &trans   &trans
+&emoji_call  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans  &bootloader                  &trans           &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &trans   &trans
+&trans       &trans          &trans          &trans           &trans  &trans       &none    &none  &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &trans   &trans
+                                             &trans           &trans  &trans       &none    &none  &trans           &trans           &trans
             >;
         };
 
@@ -90,7 +90,7 @@
             bindings = <
 &trans  &trans          &trans          &trans           &trans  &trans                  &kp KP_MINUS  &kp KP_PLUS       &trans             &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans
 &trans  &mkp MB2        &mmv MOVE_UP    &mkp MB1         &trans  &trans                  &trans        &trans            &trans             &trans            &kp MINUS          &kp EQUAL
-&trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans                  &trans        &kp K_PLAY_PAUSE  &kp K_PREV         &kp K_NEXT        &trans             &trans
+&trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans                  &bootloader   &kp K_PLAY_PAUSE  &kp K_PREV         &kp K_NEXT        &trans             &trans
 &trans  &trans          &trans          &trans           &trans  &trans  &none    &none  &kp KP_PLUS   &kp K_MUTE        &kp K_VOLUME_DOWN  &kp K_VOL_UP      &kp DELETE         &trans
                                         &trans           &trans  &trans  &none    &none  &trans        &trans            &trans
             >;
