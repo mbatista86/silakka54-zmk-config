@@ -5,11 +5,38 @@
  */
 
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
 / {
     combos { compatible = "zmk,combos"; };
+
+    macros {
+        Paste_Unformat_Combo: Paste_Unformat_Combo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_GUI &kp LEFT_ALT &kp LEFT_SHIFT &kp V>;
+            label = "PASTE_UNFORMAT_COMBO";
+        };
+
+        emoji_call: emoji_call {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_GUI &kp LEFT_CONTROL &kp SPACE>;
+            label = "EMOJI_CALL";
+        };
+    };
+
+    behaviors {
+        paste_unformat_behave: paste_unformat_behave {
+            compatible = "zmk,behavior-tap-dance";
+            label = "PASTE_UNFORMAT_BEHAVE";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_ALT>, <&kp LEFT_ALT>, <&Paste_Unformat_Combo>;
+        };
+    };
 
     keymap {
         compatible = "zmk,keymap";
@@ -25,11 +52,11 @@
 
             display-name = "Base";
             bindings = <
-&kp ESC    &kp N1  &kp N2  &kp N3  &kp N4        &kp N5                        &kp N6         &kp N7         &kp N8     &kp N9   &kp N0         &kp RIGHT_CONTROL
-&kp TAB    &kp Q   &kp W   &kp F   &kp P         &kp G                         &kp J          &kp L          &kp U      &kp Y    &kp SEMICOLON  &kp NON_US_BACKSLASH
-&kp SPACE  &kp A   &kp S   &kp R   &kp T         &kp D                         &kp H          &kp N          &kp E      &kp I    &kp O          &kp SQT
-&kp LSHFT  &kp Z   &kp X   &kp C   &kp V         &kp B         &none    &none  &kp N          &kp M          &kp COMMA  &kp DOT  &kp FSLH       &kp ENTER
-                           &mo 1   &kp LEFT_ALT  &kp LEFT_GUI  &none    &none  &kp RIGHT_GUI  &kp RIGHT_ALT  &mo 2
+&kp ESC    &kp N1  &kp N2  &kp N3  &kp N4                  &kp N5                        &kp N6         &kp N7         &kp N8     &kp N9   &kp N0         &kp RIGHT_CONTROL
+&kp TAB    &kp Q   &kp W   &kp F   &kp P                   &kp G                         &kp J          &kp L          &kp U      &kp Y    &kp SEMICOLON  &kp NON_US_BACKSLASH
+&kp SPACE  &kp A   &kp S   &kp R   &kp T                   &kp D                         &kp H          &kp N          &kp E      &kp I    &kp O          &kp SQT
+&kp LSHFT  &kp Z   &kp X   &kp C   &kp V                   &kp B         &none    &none  &kp N          &kp M          &kp COMMA  &kp DOT  &kp FSLH       &kp ENTER
+                           &mo 1   &paste_unformat_behave  &kp LEFT_GUI  &none    &none  &kp RIGHT_GUI  &kp RIGHT_ALT  &mo 2
             >;
         };
 
@@ -43,11 +70,11 @@
 
             display-name = "F1 Layer";
             bindings = <
-&kp ENTER  &kp F1          &kp F2          &kp F3           &kp F4  &kp F5                  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans
-&kp MINUS  &kp EQUAL       &kp UP_ARROW    &trans           &trans  &trans                  &trans  &trans  &trans  &trans  &trans   &trans
-&trans     &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans  &trans                  &trans  &trans  &trans  &trans  &trans   &trans
-&trans     &trans          &trans          &trans           &trans  &trans  &none    &none  &trans  &trans  &trans  &trans  &trans   &trans
-                                           &trans           &trans  &trans  &none    &none  &trans  &trans  &trans
+&kp ENTER    &kp F1          &kp F2          &kp F3           &kp F4  &kp F5                  &kp F6           &kp F7           &kp F8           &kp F9           &kp F10  &trans
+&kp MINUS    &kp EQUAL       &kp UP_ARROW    &trans           &trans  &trans                  &trans           &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &trans   &trans
+&emoji_call  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans  &trans                  &trans           &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &trans   &trans
+&trans       &trans          &trans          &trans           &trans  &trans  &none    &none  &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &trans   &trans
+                                             &trans           &trans  &trans  &none    &none  &trans           &trans           &trans
             >;
         };
 
@@ -69,7 +96,17 @@
             >;
         };
 
-        f3_layer { status = "reserved"; };
+        f3_layer {
+            bindings = <
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &out OUT_USB  &trans  &kp C_BRI_DN  &kp C_BRI_UP  &trans  &bt BT_CLR_ALL
+&trans      &trans        &trans        &trans        &trans        &trans                        &out OUT_BLE  &trans  &trans        &trans        &trans  &trans
+&trans      &trans        &trans        &trans        &trans        &trans                        &trans        &trans  &trans        &trans        &trans  &trans
+&trans      &trans        &trans        &trans        &trans        &trans        &none    &none  &trans        &trans  &kp K_PREV    &kp K_NEXT    &trans  &trans
+                                        &trans        &trans        &trans        &none    &none  &trans        &trans  &trans
+            >;
+
+            label = "F3 Layer";
+        };
     };
 
     conditional_layers {
